@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">WishList</string>
+    <string name="header">Создадим список подарков!</string>
+    <string name="forwho">Для кого будем создавать список?</string>
+    <string name="forme">Для себя</string>
+    <string name="forother">Для других</string>
+    <string name="next">Готово</string>
+    <string name="hintName">Введите название списка</string>
+    <string name="addList">Создать список</string>
+</resources>
