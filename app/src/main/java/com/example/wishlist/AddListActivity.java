@@ -12,8 +12,8 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.wishlist.LocalDB.DBHelper;
 import com.example.wishlist.LocalDB.ListContract;
-import com.example.wishlist.LocalDB.ListsDBHelper;
 
 public class AddListActivity extends AppCompatActivity {
 
@@ -38,7 +38,12 @@ public class AddListActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String forWho;
-                if (boxMe.isChecked() || boxOther.isChecked()){
+
+                //сделать проверку на повтор названия списка!!!
+                //сделать проверку на повтор названия списка!!!
+                //сделать проверку на повтор названия списка!!!
+
+                if ((boxMe.isChecked() || boxOther.isChecked())&& !String.valueOf(addListName.getText()).equals("")){
                     if (boxMe.isChecked()){
                         forWho = "себе родимому";
                     }
@@ -46,8 +51,8 @@ public class AddListActivity extends AppCompatActivity {
                         forWho = "другу любимому";
                     }
                     wishList = new WishList(forWho, addListName.getText().toString());
-                    ListsDBHelper listsDBHelper = new ListsDBHelper(getBaseContext());
-                    SQLiteDatabase db = listsDBHelper.getWritableDatabase();
+                    DBHelper DBHelper = new DBHelper(getBaseContext());
+                    SQLiteDatabase db = DBHelper.getWritableDatabase();
 
                     ContentValues contentValues = new ContentValues();
                     contentValues.put(ListContract.ListsTable.NAME_COLUMN, String.valueOf(addListName.getText()));
@@ -56,10 +61,11 @@ public class AddListActivity extends AppCompatActivity {
                     db.insert(ListContract.ListsTable.TABLE_NAME, null, contentValues);
                     Intent intent = new Intent(getBaseContext(), MainActivity.class);
                     startActivity(intent);
+                    finish();
 
                 }
                 else {
-                    String text = "Выберите один из вариантов!";
+                    String text = "Введите все необходимые данные!";
                     int duration = Toast.LENGTH_SHORT;
                     Toast toast = Toast.makeText(getApplicationContext(), text, duration);
                     toast.show();

@@ -7,4 +7,9 @@
     <string name="next">Готово</string>
     <string name="hintName">Введите название списка</string>
     <string name="addList">Создать список</string>
+    <string name="addElement">Добавить элемент</string>
+    <string name="deleteList">Удалить список</string>
+    <string name="addItem">Добавляем элемент списка</string>
+    <string name="itemName">Название</string>
+    <string name="itemText">Дополнительная информация</string>
 </resources>
