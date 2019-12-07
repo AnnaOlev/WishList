@@ -7,8 +7,8 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.provider.BaseColumns;
 import android.util.Log;
 
-import com.example.wishlist.ListItem;
-import com.example.wishlist.WishList;
+import com.example.wishlist.Entity.ListItem;
+import com.example.wishlist.Entity.WishList;
 
 import java.util.ArrayList;
 

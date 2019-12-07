@@ -1,4 +1,4 @@
-package com.example.wishlist;
+package com.example.wishlist.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DividerItemDecoration;
@@ -10,7 +10,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.example.wishlist.Entity.WishList;
+import com.example.wishlist.Adapter.ListAdapter;
 import com.example.wishlist.LocalDB.DBHelper;
+import com.example.wishlist.R;
 
 import java.util.List;
 

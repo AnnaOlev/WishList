@@ -12,4 +12,8 @@
     <string name="addItem">Добавляем элемент списка</string>
     <string name="itemName">Название</string>
     <string name="itemText">Дополнительная информация</string>
+    <string name="login">имя пользователя</string>
+    <string name="password">пароль</string>
+    <string name="log_in">Войти</string>
+    <string name="new_user">Зарегистрироваться</string>
 </resources>

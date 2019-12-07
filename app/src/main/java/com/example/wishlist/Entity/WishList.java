@@ -1,4 +1,4 @@
-package com.example.wishlist;
+package com.example.wishlist.Entity;
 
 public class WishList {
 
@@ -6,7 +6,7 @@ public class WishList {
     private String name;
     private int id;
 
-    WishList(String forWho, String name) {
+    public WishList(String forWho, String name) {
         this.forWho = forWho;
         this.name = name;
     }

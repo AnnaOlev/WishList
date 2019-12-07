@@ -1,4 +1,4 @@
-package com.example.wishlist;
+package com.example.wishlist.Adapter;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -6,6 +6,9 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.wishlist.Entity.ListItem;
+import com.example.wishlist.R;
 
 import java.util.List;
 
@@ -18,7 +21,7 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ItemViewHold
         void onItemClick(ListItem listitem);
     }
 
-    ItemsAdapter(List<ListItem> listItems, ItemsAdapter.OnElemClickListener listener) {
+    public ItemsAdapter(List<ListItem> listItems, ItemsAdapter.OnElemClickListener listener) {
         this.listItems = listItems;
         this.listener = listener;
     }

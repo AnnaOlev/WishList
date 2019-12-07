@@ -1,4 +1,4 @@
-package com.example.wishlist;
+package com.example.wishlist.Activity;
 
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
@@ -7,15 +7,18 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.wishlist.Entity.ListItem;
+import com.example.wishlist.Adapter.ItemsAdapter;
 import com.example.wishlist.LocalDB.DBHelper;
 import com.example.wishlist.LocalDB.ListContract;
+import com.example.wishlist.R;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class ListItemsActivity extends AppCompatActivity {
@@ -70,6 +73,18 @@ public class ListItemsActivity extends AppCompatActivity {
                 finish();
             }
         });
+
+        OnBackPressedCallback callback = new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                Intent intent = new Intent(getBaseContext(), MainActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        };
+        getOnBackPressedDispatcher().addCallback(
+                this,
+                callback);
     }
 
     private List<ListItem> loadLists() {

@@ -1,4 +1,4 @@
-package com.example.wishlist;
+package com.example.wishlist.Activity;
 
 import android.content.ContentValues;
 import android.content.Intent;
@@ -10,10 +10,13 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.wishlist.Entity.WishList;
 import com.example.wishlist.LocalDB.DBHelper;
 import com.example.wishlist.LocalDB.ListContract;
+import com.example.wishlist.R;
 
 public class AddListActivity extends AppCompatActivity {
 
@@ -27,6 +30,18 @@ public class AddListActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_addlist);
+
+        OnBackPressedCallback callback = new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                Intent intent = new Intent(getBaseContext(), MainActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        };
+        getOnBackPressedDispatcher().addCallback(
+                this,
+                callback);
 
         nextButton = findViewById(R.id.nextButton);
         boxMe = findViewById(R.id.forMeCheck);

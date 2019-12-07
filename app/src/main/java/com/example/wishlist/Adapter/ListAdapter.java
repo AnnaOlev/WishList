@@ -1,10 +1,14 @@
-package com.example.wishlist;
+package com.example.wishlist.Adapter;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.wishlist.Entity.WishList;
+import com.example.wishlist.R;
+
 import java.util.List;
 
 public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ListViewHolder> {
@@ -16,7 +20,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ListViewHolder
         void onItemClick(WishList item);
     }
 
-    ListAdapter(List<WishList> wishLists, OnItemClickListener listener) {
+    public ListAdapter(List<WishList> wishLists, OnItemClickListener listener) {
         this.wishLists = wishLists;
         this.listener = listener;
     }

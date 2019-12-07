@@ -1,4 +1,4 @@
-package com.example.wishlist;
+package com.example.wishlist.Entity;
 
 public class ListItem {
 
