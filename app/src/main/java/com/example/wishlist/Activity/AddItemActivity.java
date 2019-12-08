@@ -2,9 +2,11 @@ package com.example.wishlist.Activity;
 
 import android.content.ContentValues;
 import android.content.Intent;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.provider.BaseColumns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -15,6 +17,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.wishlist.LocalDB.DBHelper;
 import com.example.wishlist.LocalDB.ItemContract;
+import com.example.wishlist.LocalDB.ListContract;
 import com.example.wishlist.R;
 import com.example.wishlist.RequestHandler;
 
@@ -25,16 +28,17 @@ public class AddItemActivity extends AppCompatActivity {
     EditText addItemTitle;
     EditText addItemText;
     Button button;
-    int id;
-    String title = "параша";
-    String text = "какая-то";
+    int id; //для получения id списка
+    String title;
+    String text;
+    int elemId;
 
     @Override
     protected void onCreate(Bundle onSavedInstanceState) {
         super.onCreate(onSavedInstanceState);
         setContentView(R.layout.activity_additem);
 
-        OnBackPressedCallback callback = new OnBackPressedCallback(true) {
+        OnBackPressedCallback callback = new OnBackPressedCallback(true) { //чтобы не ломалось при нажатии назад
             @Override
             public void handleOnBackPressed() {
                 Intent intent = new Intent(getBaseContext(), ListItemsActivity.class);
@@ -43,6 +47,7 @@ public class AddItemActivity extends AppCompatActivity {
                 finish();
             }
         };
+
         getOnBackPressedDispatcher().addCallback(
                 this,
                 callback);
@@ -54,14 +59,13 @@ public class AddItemActivity extends AppCompatActivity {
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                if (!String.valueOf(addItemTitle.getText()).equals("")) {
+            public void onClick(View v) { //кнока добавления элемента, обработчик нажатия
+                if (!String.valueOf(addItemTitle.getText()).equals("")) { //сделать более надежную проверку
                     DBHelper DBHelper = new DBHelper(getBaseContext());
                     SQLiteDatabase db = DBHelper.getWritableDatabase();
 
                     title = String.valueOf(addItemTitle.getText());
                     text = String.valueOf(addItemText.getText());
-
 
                     ContentValues contentValues = new ContentValues();
                     contentValues.put(ItemContract.ItemTable.TITLE_COLUMN, String.valueOf(addItemTitle.getText()));
@@ -69,7 +73,16 @@ public class AddItemActivity extends AppCompatActivity {
                     contentValues.put(ItemContract.ItemTable.LIST_COLUMN, id);
                     db.insert(ItemContract.ItemTable.TABLE_NAME, null, contentValues);
 
-                    new ItemRequestAsync().execute();
+                    String selectQuery = "SELECT * FROM items\n" +
+                            " ORDER BY " + BaseColumns._ID + " DESC LIMIT 1;";
+                    db = DBHelper.getReadableDatabase();
+                    Cursor cursor = db.rawQuery(selectQuery, null);
+                    cursor.moveToLast();
+                    elemId = Integer.parseInt(cursor.getString(cursor.getColumnIndex(ItemContract.ItemTable._ID)));
+                    cursor.close();
+                    //поиск id свежедобалвенного списка
+
+                    new ItemRequestAsync().execute(); //кидаем в базу на сервере
 
                     Intent intent = new Intent(getBaseContext(), ListItemsActivity.class);
                     intent.putExtra("id", id);
@@ -85,21 +98,19 @@ public class AddItemActivity extends AppCompatActivity {
             }
 
         });
-
-
     }
 
     public class ItemRequestAsync extends AsyncTask<String, String, String> {
         @Override
         protected String doInBackground(String... strings) {
             try {
-                //GET Request
-                //return RequestHandler.sendGet("http://192.168.0.19:8500/"+title);
-
                 // POST Request
                 JSONObject postDataParams = new JSONObject();
                 postDataParams.put("title", title);
                 postDataParams.put("text", text);
+                postDataParams.put("type", "newItem");
+                postDataParams.put("listId", id);
+                postDataParams.put("id", elemId);
 
                 return RequestHandler.sendPost("http://192.168.0.19:8500", postDataParams);
             } catch (Exception e) {

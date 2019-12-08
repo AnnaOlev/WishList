@@ -73,11 +73,13 @@ public class AuthActivity extends AppCompatActivity {
     }
 
     public class AuthRequestAsync extends AsyncTask<String, String, String> {
+        //задача для авторизации
         @Override
         protected String doInBackground(String... strings) {
             try {
                 // POST Request
                 JSONObject postDataParams = new JSONObject();
+                postDataParams.put("type", "auth");
                 postDataParams.put("username", userName);
                 postDataParams.put("password", password);
 
@@ -93,6 +95,7 @@ public class AuthActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), s, Toast.LENGTH_LONG).show();
                 if (s.equals("Авторизация успешна")) {
                     Intent intent = new Intent(getBaseContext(), MainActivity.class);
+                    intent.putExtra("username", userName);
                     startActivity(intent);
                     finish();
                 }
@@ -101,11 +104,13 @@ public class AuthActivity extends AppCompatActivity {
     }
 
     public class RegRequestAsync extends AsyncTask<String, String, String> {
+        //задача для регистрации
         @Override
         protected String doInBackground(String... strings) {
             try {
                 // POST Request
                 JSONObject postDataParams = new JSONObject();
+                postDataParams.put("type", "registration");
                 postDataParams.put("newusername", userName);
                 postDataParams.put("newpassword", password);
 

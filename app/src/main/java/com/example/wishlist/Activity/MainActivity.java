@@ -23,11 +23,14 @@ public class MainActivity extends AppCompatActivity {
     RecyclerView recyclerView;
     Button button;
     DBHelper helper = new DBHelper(this);
+    String username;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        username = getIntent().getStringExtra("username");
 
         recyclerView = findViewById(R.id.listsRecycler);
         listAdapter = new ListAdapter(loadLists(), new ListAdapter.OnItemClickListener() {
@@ -50,6 +53,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getBaseContext(), AddListActivity.class);
+                intent.putExtra("username", username);
                 startActivity(intent);
                 finish();
             }

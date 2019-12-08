@@ -75,7 +75,6 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ListViewHolder
 
             nameTextView = itemView.findViewById(R.id.listNameText);
             forWhoTextView = itemView.findViewById(R.id.forWhoListText);
-            //listId = itemView.findViewById(R.id.listId);
         }
     }
 }
