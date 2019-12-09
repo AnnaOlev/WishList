@@ -1,21 +1,24 @@
 package com.example.wishlist.Activity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.wishlist.DataLoader;
 import com.example.wishlist.R;
 import com.example.wishlist.RequestHandler;
-
 import org.json.JSONObject;
 
 public class AuthActivity extends AppCompatActivity {
+
+    SharedPreferences sp;
+    SharedPreferences.Editor editor;
 
     Button login;
     Button registration;
@@ -28,6 +31,15 @@ public class AuthActivity extends AppCompatActivity {
     protected void onCreate(Bundle onSavedInstanceState) {
         super.onCreate(onSavedInstanceState);
         setContentView(R.layout.activity_auth);
+
+        sp = getPreferences(MODE_PRIVATE);
+
+        String username = sp.getString("username", "guest");
+        if (!username.equals("guest")) {
+            Intent intent = new Intent(getBaseContext(), MainActivity.class);
+            startActivity(intent);
+            finish();
+        }
 
         login = findViewById(R.id.login);
         registration = findViewById(R.id.registration);
@@ -69,7 +81,6 @@ public class AuthActivity extends AppCompatActivity {
                 }
             }
         });
-
     }
 
     public class AuthRequestAsync extends AsyncTask<String, String, String> {
@@ -94,7 +105,10 @@ public class AuthActivity extends AppCompatActivity {
             if (s != null) {
                 Toast.makeText(getApplicationContext(), s, Toast.LENGTH_LONG).show();
                 if (s.equals("Авторизация успешна")) {
-                    Intent intent = new Intent(getBaseContext(), MainActivity.class);
+                    editor = sp.edit();
+                    editor.putString("username", userName);
+                    editor.apply();
+                    Intent intent = new Intent(getBaseContext(), DataLoader.class);
                     intent.putExtra("username", userName);
                     startActivity(intent);
                     finish();
@@ -125,7 +139,11 @@ public class AuthActivity extends AppCompatActivity {
             if (s != null) {
                 Toast.makeText(getApplicationContext(), s, Toast.LENGTH_LONG).show();
                 if (s.equals("Регистрация успешна")) {
+                    editor = sp.edit();
+                    editor.putString("username", userName);
+                    editor.apply();
                     Intent intent = new Intent(getBaseContext(), MainActivity.class);
+                    intent.putExtra("username", userName);
                     startActivity(intent);
                     finish();
                 }

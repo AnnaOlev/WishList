@@ -17,7 +17,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.wishlist.LocalDB.DBHelper;
 import com.example.wishlist.LocalDB.ItemContract;
-import com.example.wishlist.LocalDB.ListContract;
 import com.example.wishlist.R;
 import com.example.wishlist.RequestHandler;
 
