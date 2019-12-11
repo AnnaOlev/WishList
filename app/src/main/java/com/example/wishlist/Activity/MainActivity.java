@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
         listAdapter = new ListAdapter(loadLists(), new ListAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(WishList wishList) {
-                Toast.makeText(getBaseContext(), wishList.getName(), Toast.LENGTH_LONG).show();
+                //Toast.makeText(getBaseContext(), wishList.getName(), Toast.LENGTH_LONG).show();
                 Intent intent = new Intent(getBaseContext(), ListItemsActivity.class);
                 intent.putExtra("id", wishList.getId());
                 startActivity(intent);

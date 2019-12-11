@@ -9,11 +9,11 @@
     <string name="addList">Создать список</string>
     <string name="addElement">Добавить элемент</string>
     <string name="deleteList">Удалить список</string>
-    <string name="addItem">Добавляем элемент списка</string>
+    <string name="addItem">Новый элемент списка</string>
     <string name="itemName">Название</string>
     <string name="itemText">Дополнительная информация</string>
-    <string name="login">имя пользователя</string>
-    <string name="password">пароль</string>
+    <string name="login">Имя пользователя</string>
+    <string name="password">Пароль</string>
     <string name="log_in">Войти</string>
     <string name="new_user">Зарегистрироваться</string>
 </resources>

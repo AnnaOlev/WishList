@@ -43,7 +43,7 @@ public class ListItemsActivity extends AppCompatActivity {
         itemsAdapter = new ItemsAdapter(loadLists(), new ItemsAdapter.OnElemClickListener() {
             @Override
             public void onItemClick(ListItem listItem) {
-                Toast.makeText(getBaseContext(), listItem.getTitle(), Toast.LENGTH_LONG).show();
+                //Toast.makeText(getBaseContext(), listItem.getTitle(), Toast.LENGTH_LONG).show();
             }
         });
 

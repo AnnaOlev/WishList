@@ -137,7 +137,7 @@ public class AuthActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(String s) {
             if (s != null) {
-                Toast.makeText(getApplicationContext(), s, Toast.LENGTH_LONG).show();
+                //Toast.makeText(getApplicationContext(), s, Toast.LENGTH_LONG).show();
                 if (s.equals("Регистрация успешна")) {
                     editor = sp.edit();
                     editor.putString("username", userName);

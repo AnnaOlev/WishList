@@ -56,7 +56,7 @@ public class DataLoader extends AppCompatActivity {
 
                     for (String value : array) {
                         list = value.split(",");
-                        Toast.makeText(getApplicationContext(),list[0], Toast.LENGTH_LONG).show();
+                        //Toast.makeText(getApplicationContext(),list[0], Toast.LENGTH_LONG).show();
                         contentValues.put(ListContract.ListsTable.NAME_COLUMN, list[0]);
                         contentValues.put(ListContract.ListsTable.FOR_WHO_COLUMN, list[1]);
                         db.insert(ListContract.ListsTable.TABLE_NAME, null, contentValues);
@@ -97,7 +97,7 @@ public class DataLoader extends AppCompatActivity {
 
                     for (String value : array) {
                         list = value.split(",");
-                        Toast.makeText(getApplicationContext(),list[0], Toast.LENGTH_LONG).show();
+                        //Toast.makeText(getApplicationContext(),list[0], Toast.LENGTH_LONG).show();
                         contentValues.put(ItemContract.ItemTable.TITLE_COLUMN, list[0]);
                         contentValues.put(ItemContract.ItemTable.TEXT_COLUMN, list[1]);
                         contentValues.put(ItemContract.ItemTable.LIST_COLUMN, list[2]);

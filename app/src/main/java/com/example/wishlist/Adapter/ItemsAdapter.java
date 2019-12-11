@@ -58,8 +58,8 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ItemViewHold
         private TextView textTextView;
 
         void bind(final ListItem listItem) {
-            nameTextView.setText(listItem.getTitle());
-            textTextView.setText(listItem.getText());
+            nameTextView.setText("Название: " + listItem.getTitle());
+            textTextView.setText("Дополнительная информация: " + listItem.getText());
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override public void onClick(View v) {
@@ -73,7 +73,7 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ItemViewHold
             super(itemView);
 
             nameTextView = itemView.findViewById(R.id.elemListNameText);
-            textTextView = itemView.findViewById(R.id.textElemText);
+            textTextView = itemView.findViewById(R.id.nameElemText);
         }
     }
 }

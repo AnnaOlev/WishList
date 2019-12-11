@@ -58,8 +58,8 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ListViewHolder
         //private TextView listId;
 
         void bind(final WishList wishList) {
-            nameTextView.setText(wishList.getName());
-            forWhoTextView.setText(wishList.getForWho());
+            nameTextView.setText("Название: " + wishList.getName());
+            forWhoTextView.setText("Кому: " + wishList.getForWho());
             //listId.setText(""+wishList.getId());
 
             itemView.setOnClickListener(new View.OnClickListener() {
