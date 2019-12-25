@@ -38,7 +38,7 @@ public class DataLoader extends AppCompatActivity {
                 postDataParams.put("type", "downloadLists");
                 postDataParams.put("user", username);
 
-                return RequestHandler.sendPost("http://192.168.0.19:8500", postDataParams);
+                return RequestHandler.sendPost("http://192.168.43.147:8500", postDataParams);
             } catch (Exception e) {
                 return "Exception: " + e.getMessage();
             }
@@ -79,7 +79,7 @@ public class DataLoader extends AppCompatActivity {
                 postDataParams.put("type", "downloadItems");
                 postDataParams.put("user", username);
 
-                return RequestHandler.sendPost("http://192.168.0.19:8500", postDataParams);
+                return RequestHandler.sendPost("http://192.168.43.147:8500", postDataParams);
             } catch (Exception e) {
                 return "Exception: " + e.getMessage();
             }

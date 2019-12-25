@@ -2,6 +2,7 @@ package com.example.wishlist.Activity;
 
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -18,6 +19,9 @@ import com.example.wishlist.Adapter.ItemsAdapter;
 import com.example.wishlist.LocalDB.DBHelper;
 import com.example.wishlist.LocalDB.ListContract;
 import com.example.wishlist.R;
+import com.example.wishlist.RequestHandler;
+
+import org.json.JSONObject;
 
 import java.util.List;
 
@@ -28,6 +32,7 @@ public class ListItemsActivity extends AppCompatActivity {
     RecyclerView recyclerView;
     ItemsAdapter itemsAdapter;
     int id;
+    String username;
     DBHelper helper = new DBHelper(this);
 
     @Override
@@ -39,6 +44,7 @@ public class ListItemsActivity extends AppCompatActivity {
         addButton = findViewById(R.id.addElemButton);
         recyclerView = findViewById(R.id.elemRecycler);
         id = getIntent().getIntExtra("id", 0);
+        username = getIntent().getStringExtra("username");
 
         itemsAdapter = new ItemsAdapter(loadLists(), new ItemsAdapter.OnElemClickListener() {
             @Override
@@ -68,6 +74,7 @@ public class ListItemsActivity extends AppCompatActivity {
                 sqLiteDatabase.delete(ListContract.ListsTable.TABLE_NAME, ListContract.ListsTable._ID+" = ?",
                         new String[]{Integer.toString(id)});
                 sqLiteDatabase.close();
+                new DeleteAsync().execute();
                 Intent intent = new Intent(getBaseContext(), MainActivity.class);
                 startActivity(intent);
                 finish();
@@ -91,5 +98,29 @@ public class ListItemsActivity extends AppCompatActivity {
         List<ListItem> items;
         items = helper.getListItems(id);
         return items;
+    }
+
+    public class DeleteAsync extends AsyncTask<String, String, String> {
+        @Override
+        protected String doInBackground(String... strings) {
+            try {
+                // POST Request
+                JSONObject postDataParams = new JSONObject();
+                postDataParams.put("type", "deleteList");
+                postDataParams.put("username", username);
+                postDataParams.put("id", id);
+
+                return RequestHandler.sendPost("http://192.168.43.147:8500", postDataParams);
+            } catch (Exception e) {
+                return "Exception: " + e.getMessage();
+            }
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            if (s != null) {
+                //Toast.makeText(getApplicationContext(), s, Toast.LENGTH_LONG).show();
+            }
+        }
     }
 }

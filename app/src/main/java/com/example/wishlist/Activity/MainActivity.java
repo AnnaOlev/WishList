@@ -53,6 +53,7 @@ public class MainActivity extends AppCompatActivity {
                 //Toast.makeText(getBaseContext(), wishList.getName(), Toast.LENGTH_LONG).show();
                 Intent intent = new Intent(getBaseContext(), ListItemsActivity.class);
                 intent.putExtra("id", wishList.getId());
+                intent.putExtra("username", username);
                 startActivity(intent);
                 finish();
             }

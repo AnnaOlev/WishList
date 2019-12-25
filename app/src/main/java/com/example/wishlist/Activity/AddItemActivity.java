@@ -111,7 +111,7 @@ public class AddItemActivity extends AppCompatActivity {
                 postDataParams.put("listId", id);
                 postDataParams.put("id", elemId);
 
-                return RequestHandler.sendPost("http://192.168.0.19:8500", postDataParams);
+                return RequestHandler.sendPost("http://192.168.43.147:8500", postDataParams);
             } catch (Exception e) {
                 return "Exception: " + e.getMessage();
             }

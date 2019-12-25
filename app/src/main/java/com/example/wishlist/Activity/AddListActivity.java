@@ -65,7 +65,7 @@ public class AddListActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) { //добавление списка
                 //нужно как-то изменить проверку, чтобы не позволять двух чекбоксов сразу
-                if ((boxMe.isChecked() || boxOther.isChecked())&& !String.valueOf(addListName.getText()).equals("")){
+                if ( !(boxMe.isChecked() && boxOther.isChecked())&&(boxMe.isChecked() || boxOther.isChecked())&& !String.valueOf(addListName.getText()).equals("")){
                     if (boxMe.isChecked()){
                         forWho = "себе родимому";
                     }
@@ -122,7 +122,7 @@ public class AddListActivity extends AppCompatActivity {
                 postDataParams.put("username", username);
                 postDataParams.put("id", id);
 
-                return RequestHandler.sendPost("http://192.168.0.19:8500", postDataParams);
+                return RequestHandler.sendPost("http://192.168.43.147:8500", postDataParams);
             } catch (Exception e) {
                 return "Exception: " + e.getMessage();
             }

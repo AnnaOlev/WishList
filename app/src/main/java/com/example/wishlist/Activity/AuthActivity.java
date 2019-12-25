@@ -94,7 +94,7 @@ public class AuthActivity extends AppCompatActivity {
                 postDataParams.put("username", userName);
                 postDataParams.put("password", password);
 
-                return RequestHandler.sendPost("http://192.168.0.19:8500", postDataParams);
+                return RequestHandler.sendPost("http://192.168.43.147:8500", postDataParams);
             } catch (Exception e) {
                 return "Exception: " + e.getMessage();
             }
@@ -128,7 +128,7 @@ public class AuthActivity extends AppCompatActivity {
                 postDataParams.put("newusername", userName);
                 postDataParams.put("newpassword", password);
 
-                return RequestHandler.sendPost("http://192.168.0.19:8500", postDataParams);
+                return RequestHandler.sendPost("http://192.168.43.147:8500", postDataParams);
             } catch (Exception e) {
                 return "Exception: " + e.getMessage();
             }
